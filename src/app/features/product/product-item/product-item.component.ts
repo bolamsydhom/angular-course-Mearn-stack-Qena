@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/_model/product';
+import { ProductService } from 'src/app/_services/product.services';
 
 @Component({
   selector: 'app-product-item',
@@ -8,19 +9,12 @@ import { Product } from 'src/app/_model/product';
 })
 export class ProductItemComponent implements OnInit, OnChanges {
   @Input() product: Product;
-  @Output() itemAdded = new EventEmitter<Product>();
+  // @Output() itemAdded = new EventEmitter<Product>();
+
   example: string;
-  person:{name,age}
-  constructor() {
-    // if (this.product.price < 500) {
-    //   //this a backend call
-    //   this.product = {
-    //     name: 'WOW DEAL',
-    //     price: 300,
-    //     // discount: 50,
-    //     imgUrl: '../../../../assets/img/placeholder.png',
-    //   };
-    // }
+  person:{name,age};
+
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {}
@@ -34,6 +28,7 @@ export class ProductItemComponent implements OnInit, OnChanges {
   }
 
   addedToCart(): void {
-    this.itemAdded.emit(this.product);
+    // this.itemAdded.emit(this.product);
+    this.productService.productAdded.emit(this.product);
   }
 }

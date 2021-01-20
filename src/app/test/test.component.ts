@@ -25,7 +25,26 @@ export class TestComponent implements OnInit {
     }, 3000);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const myPromise = new Promise(this.myPromiseFunctions);
+    // myPromise.then((res) => alert(res)).catch(err => console.error(err)).finally(() => console.log('promise ended'));
+  }
+  myPromiseFunctions(
+    resolve: (value: unknown) => void,
+    reject: (reason?: any) => void
+  ) {
+    ///code
+    console.log('inPromise');
+    
+    const x = 6;
+    const y = 4;
+
+    if (x + y === 10) {
+      resolve(x + y);
+    } else {
+      reject('server went down');
+    }
+  }
   onButtonClicked() {
     this.buttonClicked = !this.buttonClicked;
   }
@@ -41,6 +60,5 @@ export class TestComponent implements OnInit {
   submit(): void {
     const test = (this.elmentTest.nativeElement as HTMLDivElement).innerHTML;
     console.log(test);
-    
   }
 }

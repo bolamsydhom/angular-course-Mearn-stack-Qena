@@ -80,7 +80,7 @@
         <!-- items -->
         <div class="item-listing__items item-listing--3items">
           <!-- medium item -->
-          <app-product-item (itemAdded)="subscribeFunction($event)" *ngFor='let prod of getSlicedArrayOfProducts()' [product]='prod'
+          <app-product-item *ngFor='let prod of getSlicedArrayOfProducts()' [product]='prod'
             class="item-medium-1"></app-product-item>
 
           <!-- for(int i = 0 ; i< products.length; i++){
