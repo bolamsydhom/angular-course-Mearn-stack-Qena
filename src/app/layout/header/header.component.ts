@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   changeCurrentPage(dest: string) {
     this.productService.currentPage = dest;
   }
+  
 
   calculateTotalAmount(): number {
     let total = 0;

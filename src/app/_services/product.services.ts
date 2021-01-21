@@ -5,101 +5,108 @@ export class ProductService {
   private products: Product[] = [
     {
       id: 1,
-      name: 'Photo camera',
+      data: [{ name: 'Photo camera', description: 'Hamaaaaaaaada' }],
       price: 300,
       discount: 50,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 2,
-      name: 'camera',
+      data: [{ name: 'camera', description: 'Hamaaaaaaaada' }],
       price: 3000,
       // discount: 50,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 3,
-      name: 'Phone',
+      data: [{ name: 'phone', description: 'Hamaaaaaaaada' }],
       price: 500,
       discount: 50,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 4,
-      name: 'Samsung Note 8',
+      data: [{ name: 'Note 8', description: 'Hamaaaaaaaada' }],
       price: 5000,
       // discount: 100,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 5,
-      name: 'Labtop',
+      data: [{ name: 'laptop', description: 'Hamaaaaaaaada' }],
       price: 30000,
       discount: 5000,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 6,
-      name: 'Hamada',
+      data: [{ name: 'camera 1', description: 'Hamaaaaaaaada' }],
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 7,
-      name: 'Hamada1',
+      data: [{ name: 'camera 2', description: 'Hamaaaaaaaada' }],
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 8,
-      name: 'Hamada2',
+      data: [{ name: 'camera3', description: 'Hamaaaaaaaada' }],
+
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 9,
-      name: 'Hamada3',
+      data: [{ name: 'camera 4', description: 'Hamaaaaaaaada' }],
+
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 10,
-      name: 'newItems',
+      data: [{ name: 'camera 5', description: 'Hamaaaaaaaada' }],
+
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 11,
-      name: 'newItems1',
+      data: [{ name: 'camera 6', description: 'Hamaaaaaaaada' }],
+
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 12,
-      name: 'newItems2',
+      data: [{ name: 'camera 7', description: 'Hamaaaaaaaada' }],
+
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 13,
-      name: 'newItems3',
+      data: [{ name: 'camera 8', description: 'Hamaaaaaaaada' }],
+
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
     {
       id: 14,
-      name: 'newItems4',
+      data: [{ name: 'camera 9', description: 'Hamaaaaaaaada' }],
+
       price: 10000,
       discount: 500,
-      imgUrl: '../../../../assets/img/placeholder.png',
+      imagesUrl: ['../../../../assets/img/placeholder.png'],
     },
   ];
   productAdded = new EventEmitter<Product>();
@@ -120,30 +127,49 @@ export class ProductService {
     //   }
   }
 
-  addProduct(name: string, price: number, discount: number, imgUrl: string) {
+  addProduct(product: Product) {
     const id = this.products.length;
-    const product: Product = { id, name, price, discount, imgUrl };
-    this.products.push(product);
+    const {data, price, discount, category, imagesUrl, paymentTypes, tags} = product;
+    const newProduct: Product = {
+      id,
+      data,
+      price: product.price,
+      discount: product.discount,
+      category: product.category,
+      imagesUrl: product.imagesUrl,
+      paymentTypes: product.paymentTypes,
+      tags: product.tags,
+    };
+    this.products.push(newProduct);
   }
 
-  updateProduct(
-    id: number,
-    name: string,
-    price: number,
-    discount: number,
-    imgUrl: string
-  ) {
-    const index = this.products.findIndex((p) => p.id === id);
+  updateProduct(product: Product) {
+    const index = this.products.findIndex((p) => p.id === product.id);
     //   for (let index = 0; index < this.products.length; index++) {
     //      if(this.products[index].id == id ){
     //          return index;
     //      }
     //   }
-    this.products[index] = { id, name, price, discount, imgUrl };
+    this.products[index] = {
+      id: product.id,
+      data: product.data,
+      price: product.price,
+      discount: product.discount,
+      category: product.category,
+      imagesUrl: product.imagesUrl,
+      paymentTypes: product.paymentTypes,
+      tags: product.tags,
+    };
   }
 
   deleteProduct(id: number) {
     const index = this.products.findIndex((p) => p.id === id);
     this.products.splice(index, 1);
+  }
+
+  searchByName(productName:string){
+    //e.title.toLowerCase().includes("this".toLowerCase())
+    const prodName = productName.toLowerCase();
+    return this.products.filter(p => p.data[0].name.toLowerCase().includes(prodName));
   }
 }

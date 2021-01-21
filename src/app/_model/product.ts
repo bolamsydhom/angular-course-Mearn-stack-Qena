@@ -1,7 +1,15 @@
+import { PaymentType } from './payment-type';
+import { ProductCategory } from './product-category';
+import { ProductLang } from './product-lang';
+import { Tag } from './tag';
+
 export interface Product {
-  id: number;
-  name?: string;
+  id?: number;
+  data: ProductLang[];
   price?: number;
   discount?: number;
-  imgUrl?: string;
+  imagesUrl?: string[];
+  paymentTypes?: PaymentType[];
+  category?: ProductCategory;
+  tags?: Tag[];
 }

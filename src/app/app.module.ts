@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -8,7 +9,6 @@ import { ProductItemComponent } from './features/product/product-item/product-it
 import { ProductListingComponent } from './features/product/product-listing/product-listing.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TestComponent } from './test/test.component';
-import { FormsModule } from '@angular/forms';
 import { DropdownComponent } from './shared/dropdown/dropdown.component';
 import { ProductService } from './_services/product.services';
 import { AddProductComponent } from './features/product/add-product/add-product.component';
@@ -17,6 +17,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { RouterModule } from '@angular/router';
 import { CustomAppRoutingModule } from './app-routing.module';
+import { PaymentTypeService } from './_services/payment-type.service';
+import { ProductCategoryService } from './_services/product-category';
 
 @NgModule({
   declarations: [
@@ -31,18 +33,18 @@ import { CustomAppRoutingModule } from './app-routing.module';
     AddProductComponent,
     ProductDetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    CustomAppRoutingModule
+    CustomAppRoutingModule,
     // RouterModule.forRoot([
     //   {path: 'product-listing', component: ProductListingComponent},
     //   {path: 'login', component: LoginComponent}
     // ])
   ],
-  providers: [ProductService],
-  bootstrap: [AppComponent]
+  providers: [ProductService, PaymentTypeService, ProductCategoryService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
