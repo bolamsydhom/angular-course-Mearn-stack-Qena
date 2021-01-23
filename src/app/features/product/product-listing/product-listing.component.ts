@@ -19,14 +19,26 @@ export class ProductListingComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.products = this.productService.getAllProducts();
-    this.calculateNumberOfPages();
+    // this.products = this.productService.getAllProducts();
+    this.productService.getAllProducts().subscribe(
+      (response) => {
+        
+        this.products = response['product'];
+        this.calculateNumberOfPages(response['numberOfProducts']);
+
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {}
+    );
+
     // ClassTest.cartArray
   }
 
-  calculateNumberOfPages(){
+  calculateNumberOfPages(length) {
     this.pageNumbers = [];
-    for (let index = 0; index < this.products.length / this.pageSize; index++) {
+    for (let index = 0; index < length / this.pageSize; index++) {
       this.pageNumbers.push(index + 1);
     }
   }
@@ -41,8 +53,8 @@ export class ProductListingComponent implements OnInit {
   }
 
   onSearchHandler(searchInput) {
-    this.products =  this.productService.searchByName(searchInput.value);
-    this.calculateNumberOfPages();
-    console.log(searchInput.value);
+  //   this.products = this.productService.searchByName(searchInput.value);
+  //   this.calculateNumberOfPages();
+  //   console.log(searchInput.value);
   }
 }

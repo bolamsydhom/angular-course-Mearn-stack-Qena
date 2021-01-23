@@ -8,7 +8,7 @@ export interface Product {
   data: ProductLang[];
   price?: number;
   discount?: number;
-  imagesUrl?: string[];
+  imagesUrls?: string[];
   paymentTypes?: PaymentType[];
   category?: ProductCategory;
   tags?: Tag[];

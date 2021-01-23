@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { interval, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-test',
@@ -26,16 +27,67 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // !Observable
+    // (subscribe?: (this: Observable<unknown>, subscriber: Subscriber<unknown>) => TeardownLogic):
+    const ob = new Observable((observer) => {
+      //hamda code
+      alert('hi');
+
+      // observer.next();
+      // observer.error();
+      // observer.complete();
+    });
+
+    // ob.subscribe(
+    //   (data) => {
+    //     const product = data;
+    //   },
+    //   (error) => {
+    //    console.log(error);
+    //   },
+    //   () => {
+    //     alert('third');
+
+    //   }
+    // );
+
+    const test = this.ourOwnInrerval(1000);
+    const sub = test.subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {},
+      () => {}
+    );
+    console.log(test);
+
+    setInterval(() => {
+      sub.unsubscribe();
+    }, 5000);
+    
     const myPromise = new Promise(this.myPromiseFunctions);
     // myPromise.then((res) => alert(res)).catch(err => console.error(err)).finally(() => console.log('promise ended'));
   }
+
+  ourOwnInrerval(p): Observable<number> {
+    let number = 0;
+    return new Observable((observer) => {
+      setInterval(() => {
+        observer.next(number++);
+      }, p);
+
+      // observer.error();
+      // observer.complete();
+    });
+  }
+
   myPromiseFunctions(
     resolve: (value: unknown) => void,
     reject: (reason?: any) => void
   ) {
     ///code
     console.log('inPromise');
-    
+
     const x = 6;
     const y = 4;
 

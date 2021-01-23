@@ -19,6 +19,8 @@ import { RouterModule } from '@angular/router';
 import { CustomAppRoutingModule } from './app-routing.module';
 import { PaymentTypeService } from './_services/payment-type.service';
 import { ProductCategoryService } from './_services/product-category';
+import { StringPipePipe } from './pipes/string-pipe.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,11 +36,13 @@ import { ProductCategoryService } from './_services/product-category';
     ProductDetailsComponent,
     LoginComponent,
     RegisterComponent,
+    StringPipePipe,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CustomAppRoutingModule,
+    HttpClientModule
     // RouterModule.forRoot([
     //   {path: 'product-listing', component: ProductListingComponent},
     //   {path: 'login', component: LoginComponent}

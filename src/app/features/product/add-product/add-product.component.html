@@ -5,6 +5,7 @@
           <div class="add-product__image-actions">
             <div class="add-product__image-action">
               <a href="#"><i class="fas fa-plus-square"></i></a>
+              <!-- <input type="file" name="" id=""> -->
               <a href="#"><i class="fas fa-edit"></i></a>
               <a href="#"><i class="fas fa-trash-alt"></i></a>
             </div>
@@ -58,7 +59,7 @@
 
             <div class="form-group">
               <label for="">Price</label>
-              <input [(ngModel)]="product.price"  class="form-control" type="text" name="price" id="">
+              <input [(ngModel)]="product.price"  class="form-control" type="number" name="price" id="">
             </div>
             <div class="add-product__discount">
               <div class="form-group">
@@ -72,7 +73,7 @@
               </div>
               <div class="form-group">
                 <label for="">Discount</label>
-                <input [(ngModel)]="product.discount"  class="form-control" type="text" name="discount" id="">
+                <input [(ngModel)]="product.discount"  class="form-control" type="number" name="discount" id="">
               </div>
             </div>
             <div class="form-group">
@@ -106,7 +107,7 @@
             </div>
             <div class="add-product__actions">
               <button href="#" class="btn btn--gray">Cancel</button>
-              <button (click)="onSubmit(textInputName)" href="#" class="btn btn--primary" [disabled]="myForm.invalid">Add</button>
+              <button (click)="onSubmit(textInputName)" href="#" class="btn btn--primary" [disabled]="myForm.invalid">{{editMode? 'Update': 'Add'}}</button>
             </div>
           </div>
         </div>
