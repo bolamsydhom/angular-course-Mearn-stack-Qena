@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/_services/product.services';
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent implements OnInit {
-  product: Product = { data: [{}], paymentTypes: [], tags: [], category: {} };
+  product = { data: [{}], paymentTypes: [], tags: [], category: {} };
   paymentTypes: PaymentType[] = [];
   productCategory: ProductCategory[] = [];
   editMode: boolean = false;
@@ -32,7 +32,13 @@ export class AddProductComponent implements OnInit {
       true;
     if (this.editMode) {
       const id = this.activatedRoute.snapshot.params.id;
-      this.product = this.productService.getProductById(+id);
+      this.productService.getProductById(id).subscribe(
+        (res) => {
+          this.product = res['product'];
+        },
+        () => {},
+        () => {}
+      );
     }
 
     this.paymentTypes = this.paymentTypeService.getAllPayments();

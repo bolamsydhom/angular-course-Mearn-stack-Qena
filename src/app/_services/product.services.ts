@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class ProductService {
-  private products: Product[] ; 
+  private products: Product[];
   // [
   //   {
   //     id: 1,
@@ -121,13 +121,14 @@ export class ProductService {
   constructor(private httpClient: HttpClient) {}
 
   getAllProducts() {
+    
     return this.httpClient.get(`${this.baseUrl}product`);
     // return this.products.slice();
   }
 
-  getProductById(id: number): Product {
-    return this.products.find((p) => p.id === id);
-
+  getProductById(id) {
+    // return this.products.find((p) => p.id === id);
+    return this.httpClient.get(`${this.baseUrl}product/${id}`);
     //   for (let index = 0; index < this.products.length; index++) {
     //      if(this.products[index].id == id ){
     //          return this.products[index]
@@ -135,7 +136,7 @@ export class ProductService {
     //   }
   }
 
-  addProduct(product: Product) {
+  addProduct(product) {
     let body = {
       discount: product.discount,
       price: product.price,
@@ -143,15 +144,14 @@ export class ProductService {
       data: product.data,
       categoryId: product.category.id,
     };
-    const token = localStorage.getItem('token');
-    console.log(token);
+    // const token = localStorage.getItem('token');
+    // console.log(token);
 
-    const headers = new HttpHeaders({
-      authorization: token,
-    });
-    return this.httpClient.post(`${this.baseUrl}product/add`, body, {
-      headers,
-    });
+    // const headers = new HttpHeaders({
+    //   authorization: token,
+    // });
+    console.log(body)
+    return this.httpClient.post(`${this.baseUrl}product/add`, body);
     // const id = this.products.length;
     // const {
     //   data,
@@ -183,16 +183,16 @@ export class ProductService {
     //          return index;
     //      }
     //   }
-    this.products[index] = {
-      id: product.id,
-      data: product.data,
-      price: product.price,
-      discount: product.discount,
-      category: product.category,
-      imagesUrls: product.imagesUrls,
-      paymentTypes: product.paymentTypes,
-      tags: product.tags,
-    };
+    // this.products[index] = {
+    //   id: product.id,
+    //   data: product.data,
+    //   price: product.price,
+    //   discount: product.discount,
+    //   category: product.category,
+    //   imagesUrls: product.imagesUrls,
+    //   paymentTypes: product.paymentTypes,
+    //   tags: product.tags,
+    // };
   }
 
   deleteProduct(id: number) {

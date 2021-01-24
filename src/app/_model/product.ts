@@ -4,6 +4,7 @@ import { ProductLang } from './product-lang';
 import { Tag } from './tag';
 
 export interface Product {
+  _id: string;
   id?: number;
   data: ProductLang[];
   price?: number;

@@ -9,8 +9,8 @@ import { ProductService } from 'src/app/_services/product.services';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  product: Product;
-  relatedProducts: Product[]=[];
+  product;
+  relatedProducts: Product[] = [];
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute
@@ -18,11 +18,26 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let id;
+
     // this.relatedProducts = this.productService.getAllProducts().slice(3, 7);
     this.activatedRoute.params.subscribe(
       (params) => {
         id = params.id;
-        this.product = this.productService.getProductById(+id);
+        this.productService.getProductById(id).subscribe(
+          (respond) => {
+            console.log(respond);
+            this.product = respond;
+            this.productService.getAllProducts().subscribe(
+              (res) => {
+                this.relatedProducts = res['product'].slice(4, 8);
+              },
+              () => {},
+              () => {}
+            );
+          },
+          (err) => {},
+          () => {}
+        );
       },
       (error) => {
         console.log(error);
@@ -30,6 +45,5 @@ export class ProductDetailsComponent implements OnInit {
       () => {}
     );
     // const id = this.activatedRoute.snapshot.params.id;
-    
   }
 }

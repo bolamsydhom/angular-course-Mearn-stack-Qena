@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
 import { Person } from '../_model/person';
 
 @Injectable({
@@ -15,7 +16,18 @@ export class AuthService {
   }
   login(person: Person) {
     console.log(person);
-    
-    return this.httpClient.post(`${this.baseUrl}user/login`, {email: person.email, password: person.password});
+
+    return this.httpClient.post(`${this.baseUrl}user/login`, {
+      email: person.email,
+      password: person.password,
+    });
+  }
+
+  isAuthenticated(): boolean {
+    if (localStorage.getItem('token')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
